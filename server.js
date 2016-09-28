@@ -5,6 +5,10 @@ const Good = require('good');
 
 const slackToken = process.env.SLACK_TOKEN;
 
+const wisdom = "it's really you this time!";
+
+
+
 const server = new Hapi.Server();
 server.connection({
   port: process.env.PORT || 3000
@@ -14,13 +18,16 @@ server.route({
   method: 'POST',
   path: '/rlyu',
   handler: function (request, reply) {
-    var wisdom = "it's really you this time!";
 
-    if (request.payload.token && request.payload.token === slackToken) {
-      if (request.payload.user_name != 'slackbot') {
-        wisdom = request.payload.user_name + ", " + wisdom;
-        reply({ "text": wisdom }).code(200);
-      } else { reply().code(200); }
+    let hasSlackKey = (request.payload.token && request.payload.token === slackToken) ? true : false ;
+
+    let notFromBot = (request.payload.user_name == 'slackbot') ? false : true;
+
+    let notEscaped = (request.payload.text && request.payload.text.match(/really you/)) ? false : true;
+
+    if (hasSlackKey && notFromBot && notEscaped) {
+      let message = request.payload.user_name + ", " + wisdom;
+      reply({"text": message}).code(200);
     } else {
       reply().code(401);
     }
