@@ -14,8 +14,9 @@ server.route({
   method: 'POST',
   path: '/rlyu',
   handler: function (request, reply) {
+    var whoPosted = request.user_name;
     var myReply = {"text": ""};
-    if (request.payload.token === slackToken) {
+    if (request.payload.token === slackToken && whoPosted != 'rlyu') {
       myReply.text = "IT'S REALLY YOU THIS TIME!";
       reply(myReply).code(200);
     } else {
