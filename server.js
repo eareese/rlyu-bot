@@ -14,10 +14,12 @@ server.route({
   method: 'POST',
   path: '/rlyu',
   handler: function (request, reply) {
+    var message = '';
     if (request.payload.token === slackToken) {
-      console.log('----');
-      console.log(request.payload);
-      console.log('----');
+      message = "IT'S REALLY YOU THIS TIME!";
+      reply(message).code(200);
+    } else {
+      reply(message).code(401);
     }
   }
 });
