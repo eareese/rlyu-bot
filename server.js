@@ -15,9 +15,9 @@ server.route({
   path: '/rlyu',
   handler: function (request, reply) {
     if (request.payload.token === slackToken) {
-      reply("rly-u-message");
-    } else {
-      reply("NOT-message");
+      console.log('----');
+      console.log(request.payload);
+      console.log('----');
     }
   }
 });
