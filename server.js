@@ -16,6 +16,10 @@ server.route({
   handler: function (request, reply) {
     var importantMessage = "It's really you this time!";
     if (request.payload.token && request.payload.token === slackToken) {
+      console.log('----');
+      console.log(request.payload.user_name);
+      console.log(request.payload.user_id);
+      console.log('----');
       if (request.payload.user_name != 'rlyu') {
         reply({"text": importantMessage}).code(200);
       } else { reply().code(200); }
