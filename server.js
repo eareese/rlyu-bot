@@ -14,8 +14,11 @@ server.route({
   method: 'POST',
   path: '/rlyu',
   handler: function (request, reply) {
-    if (slackToken === request.payload.token) {
+    if (request.payload.token === slackToken) {
       reply("rly-u-message");
+    } else {
+      reply("NOT-message");
+    }
   }
 });
 
