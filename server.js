@@ -14,13 +14,13 @@ server.route({
   method: 'POST',
   path: '/rlyu',
   handler: function (request, reply) {
-    var whoPosted = request.user_name;
-    var myReply = {"text": ""};
-    if (request.payload.token === slackToken && whoPosted != 'rlyu') {
-      myReply.text = "IT'S REALLY YOU THIS TIME!";
-      reply(myReply).code(200);
+    var importantMessage = "It's really you this time!";
+    if (request.payload.token && request.payload.token === slackToken) {
+      if (request.payload.user_name != 'rlyu') {
+        reply({"text": importantMessage}).code(200);
+      } else { reply().code(200); }
     } else {
-      reply(myReply).code(401);
+      reply().code(401);
     }
   }
 });
