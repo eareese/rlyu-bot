@@ -3,6 +3,8 @@
 const Hapi = require('hapi');
 const Good = require('good');
 
+const slackToken = process.env.SLACK_TOKEN;
+
 const server = new Hapi.Server();
 server.connection({ port: 3000 });
 
@@ -10,7 +12,8 @@ server.route({
   method: 'POST',
   path: '/rlyu',
   handler: function (request, reply) {
-    reply("rly-u-message");
+    if (slackToken === request.payload.token) {
+      reply("rly-u-message");
   }
 });
 
