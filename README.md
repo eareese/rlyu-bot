@@ -10,3 +10,7 @@ However, it will not respond when the message includes a special escape phrase. 
 
 ### Escape phrases list
 * `really you`
+
+## Under construction
+
+Added a few todo/wishlist items on the [Home page of the project Wiki](https://github.com/eareese/rlyu-bot/wiki).
