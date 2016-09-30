@@ -23,7 +23,8 @@ server.route({
 
     let notFromBot = (request.payload.user_name == 'slackbot') ? false : true;
 
-    let notEscaped = (request.payload.text && request.payload.text.match(/really you/)) ? false : true;
+    let notEscaped = (request.payload.text
+                      && request.payload.text.toLowerCase().match(/really you/)) ? false : true;
 
     if (hasSlackKey && notFromBot && notEscaped) {
       let message = request.payload.user_name + ", " + wisdom;
